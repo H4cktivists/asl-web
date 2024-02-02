@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Game from "./Game";
 import Login from "./Login";
 import Learn from "./Learn";
+import Gesture from "./Gesture";
 
 export default function App() {
   return (
@@ -11,6 +12,8 @@ export default function App() {
         <Route path="/" element={<Login />} />
         <Route path="/game" element={<Game />} />
         <Route path="/learn" element={<Learn />} />
+        <Route path="/Gesture" element={<Gesture />} />
+    
       </Routes>
     </BrowserRouter>
   );
