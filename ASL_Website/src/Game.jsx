@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import { useHistory } from "react-router-dom";
 import "./game.css";
 
@@ -13,6 +13,11 @@ export default function Game() {
     "G",
     "H"
   ]);
+
+  useEffect(() => {
+    console.log("rendered");
+    sessionStorage.setItem("completedElements", []);
+  });
 
   //   const history = useHistory();
 
