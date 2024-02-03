@@ -1,6 +1,6 @@
 import { FilesetResolver, HandLandmarker, DrawingUtils } from "@mediapipe/tasks-vision";
 import React, { useEffect } from "react";
-//import * as tf from Tensorflow.js
+
 export default function HandLandmarkDetection() {
     useEffect(() => {
         let handLandmarker;
@@ -8,25 +8,27 @@ export default function HandLandmarkDetection() {
         let enableWebcamButton;
         const videoHeight = "360px";
         const videoWidth = "480px";
+
         async function runDemo() {
             const vision = await FilesetResolver.forVisionTasks(
-              "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
+                "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
             );
             handLandmarker = await HandLandmarker.createFromOptions(vision, {
-              baseOptions: {
-                modelAssetPath: `https://storage.googleapis.com/mediapipe-assets/hand_landmarker.task`
-              },
-              runningMode: runningMode,
-              numHands: 2
+                baseOptions: {
+                    modelAssetPath: `https://storage.googleapis.com/mediapipe-assets/hand_landmarker.task`,
+                },
+                runningMode: runningMode,
+                numHands: 1,
             });
-          }
-        runDemo()
-        
+        }
+
+        runDemo();
+
         const video = document.getElementById("webcam");
         const canvasElement = document.getElementById("output_canvas");
         const canvasCtx = canvasElement.getContext("2d");
 
-        let webcamRunning= false;
+        let webcamRunning = false;
 
         // Check if webcam access is supported.
         function hasGetUserMedia() {
@@ -45,59 +47,69 @@ export default function HandLandmarkDetection() {
         // Enable the live webcam view and start detection.
         function enableCam(event) {
             if (!handLandmarker) {
-            console.log("Wait! objectDetector not loaded yet.");
-            return;
+                console.log("Wait! objectDetector not loaded yet.");
+                return;
             }
-        
+
             if (webcamRunning === true) {
-            webcamRunning = false;
-            enableWebcamButton.innerText = "ENABLE PREDICTIONS";
+                webcamRunning = false;
+                enableWebcamButton.innerText = "ENABLE PREDICTIONS";
             } else {
-            console.log("webcam was off");
-            webcamRunning = true;
-            enableWebcamButton.innerText = "DISABLE PREDICITONS";
+                console.log("webcam was off");
+                webcamRunning = true;
+                enableWebcamButton.innerText = "DISABLE PREDICITONS";
             }
-        
+
             // getUsermedia parameters.
             const constraints = {
-            video: true
+                video: true,
             };
-        
+
             // Activate the webcam stream.
             navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
-            video.srcObject = stream;
-            video.addEventListener("loadeddata", predictWebcam);
+                video.srcObject = stream;
+                video.addEventListener("loadeddata", predictWebcam);
             });
         }
-        const landmarkPositionsArray = [];
-        
+
+        // const landmarkPositionsArray = [];
+
         async function predictWebcam() {
             // Now let's start detecting the stream.
             if (runningMode === "IMAGE") {
                 runningMode = "VIDEO";
                 await handLandmarker.setOptions({ runningMode: runningMode });
             }
-            
-            let nowInMs = Date.now();
-            const results = handLandmarker.detectForVideo(video, nowInMs);
-        
-            if (results.worldLandmarks) {
-                let totallandmarks =[];
-                for (let i = 0; i < results.worldLandmarks.length; i++) {
-                    const worldLandmarks = results.worldLandmarks[i];
-                    
-                    console.log(`WorldLandmarks:`);
-                    for (let j = 0; j < worldLandmarks.length; j++) {
-                        console.log(`    Landmark #${j}:`);
-                        console.log(`      x            : ${worldLandmarks[j].x}`);
-                        console.log(`      y            : ${worldLandmarks[j].y}`);
-                        console.log(`      z            : ${worldLandmarks[j].z}`);
-                        totallandmarks.push(worldLandmarks[j].x, worldLandmarks[j].y, worldLandmarks[j].z)
+
+            let totalLandmarks = [];
+
+            for (let instance = 0; instance < 10; instance++) {
+                let nowInMs = Date.now();
+                const results = handLandmarker.detectForVideo(video, nowInMs);
+
+                if (results.worldLandmarks) {
+                    for (let i = 0; i < results.worldLandmarks.length; i++) {
+                        const worldLandmarks = results.worldLandmarks[i];
+
+                        for (let j = 0; j < worldLandmarks.length; j++) {
+                            totalLandmarks.push(worldLandmarks[j].x || 0, worldLandmarks[j].y || 0, worldLandmarks[j].z || 0);
+                        }
                     }
-                    console.log(totallandmarks)
+                } else {
+                    // If no frame is detected, fill with zeros.
+                    for (let k = 0; k < 21; k++) {
+                        totalLandmarks.push(0, 0, 0);
+                    }
                 }
             }
-        
+
+            // while (totalLandmarks.length < 630) {
+            //     totalLandmarks.push(0, 0, 0);
+            // }
+
+            // Log the resulting 1D array.
+            console.log("Total World Landmarks Array:", totalLandmarks);
+
             canvasCtx.save();
             canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
             const drawingUtils = new DrawingUtils(canvasCtx);
@@ -105,18 +117,17 @@ export default function HandLandmarkDetection() {
             video.style.height = videoHeight;
             canvasElement.style.width = videoWidth;
             video.style.width = videoWidth;
-        
+
             // Drawing of world landmarks on the canvas is omitted in this case.
-        
+
             canvasCtx.restore();
-        
+
             // Call this function again to keep predicting when the browser is ready.
             if (webcamRunning === true) {
                 window.requestAnimationFrame(predictWebcam);
             }
         }
-        
-    })
+    }, []); // Empty dependency array to ensure useEffect runs only once
 
     return (
         <div>
@@ -125,11 +136,11 @@ export default function HandLandmarkDetection() {
                 <button id="webcamButton">
                     <span>ENABLE WEBCAM</span>
                 </button>
-                <div style={{position: "relative"}}>
-                    <video id="webcam" style={{width: "1280px", height: "720px", position: "absolute", left: "0px", top: "0px"}} autoPlay playsInline></video>
-                    <canvas className="output_canvas" id="output_canvas" width="1280" height="720" style={{position: "absolute", left: "0px", top: "0px"}}></canvas>
+                <div style={{ position: "relative" }}>
+                    <video id="webcam" style={{ width: "1280px", height: "720px", position: "absolute", left: "0px", top: "0px" }} autoPlay playsInline></video>
+                    <canvas className="output_canvas" id="output_canvas" width="1280" height="720" style={{ position: "absolute", left: "0px", top: "0px" }}></canvas>
                 </div>
             </div>
         </div>
-    )
+    );
 }
