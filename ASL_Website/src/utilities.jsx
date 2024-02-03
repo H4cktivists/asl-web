@@ -82,3 +82,9 @@ const fingerJoints = {
       });
     }
   };
+
+  export function processResults(detections) {
+    // Implement your logic to handle Pose Landmarker results
+    console.log('Processing Pose Landmarker results:', detections);
+    // Additional logic goes here
+  }
