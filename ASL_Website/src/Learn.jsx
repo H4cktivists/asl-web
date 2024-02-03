@@ -6,7 +6,12 @@ export default function Learn() {
   return (
     <div id="lng-main">
       <div id="lng-bg">
-        <div id="lng-back-btn"></div>
+        <div
+          id="lng-back-btn"
+          onClick={() => {
+            window.location.href = "/game";
+          }}
+        ></div>
         <div id="step1" className="lng-steps">
           <div id="step1-img"></div>
         </div>
@@ -22,6 +27,7 @@ export default function Learn() {
       <div id="lng-webcam">
         <div id="lng-webcam-bg">
           <h1>{sessionStorage.getItem("currLetter")}</h1>
+          <div id="webcam-div"></div>
         </div>
       </div>
       {/* <Gesture /> */}
