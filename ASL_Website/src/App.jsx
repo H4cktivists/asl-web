@@ -5,7 +5,7 @@ import Game from "./Game";
 import Login from "./components/Login";
 import Learn from "./Learn";
 import Gesture from "./Gesture";
-import HandLandmarkDetection from "./HandLandmarkDetection";
+import MyWebcam  from "./Webcam";
 export default function App() {
   return (
     <BrowserRouter>
@@ -14,7 +14,7 @@ export default function App() {
         <Route path="/game" element={<Game />} />
         <Route path="/learn" element={<Learn />} />
         <Route path="/gesture" element={<Gesture />} />
-        <Route path="/detect" element={<HandLandmarkDetection />} />
+        <Route path="/detect" element={<MyWebcam />} />
       </Routes>
     </BrowserRouter>
   );
