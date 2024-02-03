@@ -1,5 +1,4 @@
 import React from "react";
-import Gesture from "./Gesture";
 import "./Learn.css";
 
 export default function Learn() {

@@ -1,6 +1,6 @@
 import { FilesetResolver, HandLandmarker, DrawingUtils } from "@mediapipe/tasks-vision";
 import React, { useEffect } from "react";
-
+//import * as tf from Tensorflow.js
 export default function HandLandmarkDetection() {
     useEffect(() => {
         let handLandmarker;
@@ -70,14 +70,33 @@ export default function HandLandmarkDetection() {
             });
         }
         const landmarkPositionsArray = [];
+        
         async function predictWebcam() {
             // Now let's start detecting the stream.
             if (runningMode === "IMAGE") {
-            runningMode = "VIDEO";
-            await handLandmarker.setOptions({ runningMode: runningMode });
+                runningMode = "VIDEO";
+                await handLandmarker.setOptions({ runningMode: runningMode });
             }
+            
             let nowInMs = Date.now();
             const results = handLandmarker.detectForVideo(video, nowInMs);
+        
+            if (results.worldLandmarks) {
+                let totallandmarks =[];
+                for (let i = 0; i < results.worldLandmarks.length; i++) {
+                    const worldLandmarks = results.worldLandmarks[i];
+                    
+                    console.log(`WorldLandmarks:`);
+                    for (let j = 0; j < worldLandmarks.length; j++) {
+                        console.log(`    Landmark #${j}:`);
+                        console.log(`      x            : ${worldLandmarks[j].x}`);
+                        console.log(`      y            : ${worldLandmarks[j].y}`);
+                        console.log(`      z            : ${worldLandmarks[j].z}`);
+                        totallandmarks.push(worldLandmarks[j].x, worldLandmarks[j].y, worldLandmarks[j].z)
+                    }
+                    console.log(totallandmarks)
+                }
+            }
         
             canvasCtx.save();
             canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
@@ -86,30 +105,17 @@ export default function HandLandmarkDetection() {
             video.style.height = videoHeight;
             canvasElement.style.width = videoWidth;
             video.style.width = videoWidth;
-          
-            if (results.landmarks) {
-                for (const landmarks of results.landmarks) {
-                    drawingUtils.drawConnectors(
-                        landmarks,
-                        HandLandmarker.HAND_CONNECTIONS,
-                        {
-                          color: "#00FF00",
-                          lineWidth: 5
-                        }
-                      );
-                      drawingUtils.drawLandmarks(landmarks, {
-                        color: "#FF0000",
-                        lineWidth: 2
-                      });
-                }
-            }
+        
+            // Drawing of world landmarks on the canvas is omitted in this case.
+        
             canvasCtx.restore();
         
             // Call this function again to keep predicting when the browser is ready.
             if (webcamRunning === true) {
-            window.requestAnimationFrame(predictWebcam);
+                window.requestAnimationFrame(predictWebcam);
             }
         }
+        
     })
 
     return (

@@ -4,8 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Game from "./Game";
 import Login from "./components/Login";
 import Learn from "./Learn";
-import Gesture from "./Gesture";
 import MyWebcam  from "./Webcam";
+import HandLandmarkDetection from "./Handmarkgesture";
 export default function App() {
   return (
     <BrowserRouter>
@@ -13,8 +13,8 @@ export default function App() {
         <Route path="/" element={<Login />} />
         <Route path="/game" element={<Game />} />
         <Route path="/learn" element={<Learn />} />
-        <Route path="/gesture" element={<Gesture />} />
         <Route path="/detect" element={<MyWebcam />} />
+        <Route path="/detection" element={<HandLandmarkDetection/>} />
       </Routes>
     </BrowserRouter>
   );
