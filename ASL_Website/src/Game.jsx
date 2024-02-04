@@ -27,16 +27,21 @@ export default function Game() {
   }
 
   return (
-    <div>
-      {letters.map((i, index) => (
-        <div
-          key={index}
-          className="game-element"
-          onClick={() => handleClick(i)}
-        >
-          element {i}
-        </div>
-      ))}
+    <div className="LoginGame">
+      <div className="ImageContainer">
+        <img src="../../public/map.svg" alt="Background" />
+      </div>
+      <div className="img2">
+        {letters.map((i, index) => (
+          <div
+            key={index}
+            className="game-element"
+            onClick={() => handleClick(i)}
+          >
+            element {i}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
