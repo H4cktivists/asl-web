@@ -7,7 +7,7 @@ export default function HandLandmarkDetection() {
         let handLandmarker;
         let runningMode = "VIDEO";
         let enableWebcamButton;
-        const videoHeight = "360px";
+        const videoHeight = "340px";
         const videoWidth = "480px";
 
         const video = document.getElementById("webcam");
@@ -132,18 +132,17 @@ export default function HandLandmarkDetection() {
 
     return (
         <div>
-            <h1>Hello hand landmark detection</h1>
             <div id="liveView" className="videoView">
-                <button id="webcamButton">
+                <button id="webcamButton" style={{ fontSize: "14px", padding: "8px 12px" ,height:"20px"}}>
                     <span>ENABLE WEBCAM</span>
                 </button>
-                <div style={{ position: "relative" }}>
-                    <video id="webcam" style={{ width: "1280px", height: "720px", position: "absolute", left: "0px", top: "0px" }} autoPlay playsInline></video>
-                    <canvas className="output_canvas" id="output_canvas" width="1280" height="720" style={{ position: "absolute", left: "0px", top: "0px" }}></canvas>
+                <div style={{ position: "relative", width: "340px", height: "340px" }}>
+                    <video id="webcam" style={{ width: "100%", height: "100%", position: "absolute", left: "0px", top: "0px" }} autoPlay playsInline></video>
+                    <canvas className="output_canvas" id="output_canvas" width="340px" height="340px" style={{ position: "absolute", left: "0px", top: "0px" }}></canvas>
                 </div>
             </div>
         </div>
-    );
+    );  
 }
 
 function hasGetUserMedia() {

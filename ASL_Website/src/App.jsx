@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Learn from "./Learn";
 import WebcamVideo  from "./Webcam";
 import HandLandmarkDetection from "./Handmarkgesture";
+import WebcamPage from "./Webcampage";
 //import HandsCapture from "./newmodel/index"
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/game" element={<Game />} />
         <Route path="/learn" element={<Learn />} />
         <Route path="/detect" element={<WebcamVideo />} />
+        <Route path="/web" element={<WebcamPage />} />
         <Route path="/detection" element={<HandLandmarkDetection/>} />
         {/* <Route path="/new" element={<HandsCapture />} /> */}
       </Routes>

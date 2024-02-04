@@ -34,7 +34,7 @@ const Login = () => {
     <div className="Login">
       <div className="ImageContainer">
         {/* Replace 'image.jpg' with the actual path to your image */}
-        <img src="../../public/landing.png" alt="Background" />
+        <img src="../../public/Landing.svg" alt="Background" />
       </div>
       <div className="auth-container">
         <h1 className="title">Starry</h1>

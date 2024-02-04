@@ -1,5 +1,7 @@
+// Learn.jsx
 import React from "react";
 import "./Learn.css";
+import Webcam from "./Webcam"; // Import the Webcam component
 
 export default function Learn() {
   return (
@@ -26,12 +28,12 @@ export default function Learn() {
       <div id="lng-webcam">
         <div id="lng-webcam-bg">
           <h1>{sessionStorage.getItem("currLetter")}</h1>
-          <div id="webcam-div"></div>
+          <div id="webcam-div">
+            {/* Use the Webcam component here */}
+            <Webcam />
+          </div>
         </div>
       </div>
-      {/* <Gesture /> */}
-
-      {/* <div id="lng-webcam-bg"></div> */}
     </div>
   );
 }
