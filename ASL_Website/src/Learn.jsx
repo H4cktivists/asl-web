@@ -1,5 +1,6 @@
 import React from "react";
 import "./Learn.css";
+import Progressbar from "./components/progressbar";
 
 export default function Learn() {
   return (
@@ -12,14 +13,12 @@ export default function Learn() {
           }}
         ></div>
         <div id="step1" className="lng-steps">
-          <div id="step1-img"></div>
+          {/* <div id="step1-img"></div> */}
         </div>
-        <div id="step2" className="lng-steps">
-          <div id="step2-img"></div>
+        <div id="progressbar" >
+          <Progressbar value={30} />
         </div>
-        <div id="step3" className="lng-steps">
-          <div id="step3-img"></div>
-        </div>
+       
         <div id="next-img"></div>
       </div>
 

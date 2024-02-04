@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap");
+.progressbar{
+    height: 20px;
+    width: 349px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: stretch;
+    border-radius: 10px;
+    box-shadow:0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #5B548A;
+    overflow: hidden;
+}
+.bar{
+    width: 20%;
+    border-radius: 8px;
+    background: #FED493;
+    margin: 2px 2px 0px 2px;
+}
+/* .progressbar-container{
+    display:flex ;
+    flex-direction: row;
+    align-items: center;
+}*/
+.progressbar-text-container{
+    margin-top: 4px;
+    display: flex;
+    flex-direction: row-reverse;
+    color: white;
+    font-family: "Metal Mania";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    
+} 

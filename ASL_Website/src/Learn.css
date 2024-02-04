@@ -14,7 +14,7 @@
 }
 
 #lng-bg {
-  width: 57.75rem;
+  width: 37.75rem;
   height: 57.96rem;
   position: relative;
   top: -12rem;
@@ -28,8 +28,8 @@
 }
 
 .lng-steps {
-  width: 16.4375rem;
-  height: 19.1875rem;
+  width: 18.4375rem;
+  height: 18.1875rem;
   flex-shrink: 0;
   border-radius: 23px;
   background: #fff;
@@ -49,15 +49,12 @@
 
 #step1 {
   position: relative;
-  left: 1.56rem;
-  top: 21.88rem;
+  left: 9.560000000000002rem;
+  top: 20.879999999999995rem;
+    /* width: 16.4375rem; */
+  height: 17.1875rem;
 }
 
-#step2 {
-  position: relative;
-  left: 20rem;
-  top: 12.38rem;
-}
 
 #step1-img {
   position: relative;
@@ -67,24 +64,17 @@
   top: 55%;
   left: 65%;
 }
-
-#step2-img {
+#progressbar{
+  /* width: auto;
+  height: auto; */
+  top: 24rem;
   position: relative;
-  width: 100px;
-  height: 100px;
-  background-image: url("assets/step-2.png");
-  top: 55%;
-  left: 65%;
+  left: 8rem;
+  /* background-color: black; */
+  /* color: white; */
 }
 
-#step3-img {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  background-image: url("assets/step-3.png");
-  top: 55%;
-  left: 65%;
-}
+
 
 #next-img {
   background-image: url(/src/assets/lng/next.svg);
@@ -92,8 +82,8 @@
   width: 6rem;
   height: 6rem;
   position: relative;
-  top: -163px;
-  left: 54px;
+  top: -274px;
+  left: 491px;
   transition: transform 200ms ease-in-out;
 }
 
@@ -109,33 +99,33 @@
 #lng-webcam-bg {
   flex-shrink: 0;
   border-radius: 10%;
-  background: url("assets/lng/lng_webcam.svg");
+  background: url("assets/lng/frame.svg");
   background-repeat: no-repeat;
   /* background-size: cover; */
-  width: 535px;
+  width: 749px;
   position: relative;
-  height: 645px;
-  top: 34px;
-  left: 37px;
+  height: 678px;
+  top: 25px;
+  left: 86px;
 
   display: flex;
 }
 
 #lng-webcam-bg h1 {
-  position: relative;
-  left: 14.94rem;
-  top: 3.94rem;
-  width: 4.25rem;
-  height: 7.5625rem;
-  flex-shrink: 0;
-
-  color: #fff;
-  font-family: "Metal Mania";
-  font-size: 6.6875rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+    position: relative;
+    left: -25.060000000000002rem;
+    top: 1.9399999999999995rem;
+    width: 4.25rem;
+    height: 7.5625rem;
+    flex-shrink: 0;
+    color: #fff;
+    font-family: "Metal Mania";
+    font-size: 6.6875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
+
 
 #lng-back-btn {
   position: relative;
@@ -155,13 +145,12 @@
 }
 
 #webcam-div {
-  width: 26.875rem;
-  height: 17.9375rem;
-  flex-shrink: 0;
-  border-radius: 0.5rem;
-  background: #d9d9d9;
-
-  position: relative;
-  top: 12rem;
-  left: -17px;
+    width: 33.875rem;
+    height: 23.9375rem;
+    flex-shrink: 0;
+    border-radius: 0.5rem;
+    background: #d9d9d9;
+    position: relative;
+    top: 9rem;
+    left: 40px;
 }
